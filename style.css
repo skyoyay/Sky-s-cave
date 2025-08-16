@@ -225,7 +225,7 @@ p {
 }
 /* End Header section */
 
-/* Home Section (excluded from wave effect) */
+/* Home Section (was hero) */
 #home {
 	background-image: url(fortniteorbabag.jpg);
 	background-size: cover;
@@ -272,7 +272,7 @@ p {
 	animation: text_reveal_box 1s ease;
 }
 
-/* Games Section */
+/* Games Section (was services) */
 #games .services {
 	flex-direction: column;
 	text-align: center;
@@ -340,7 +340,7 @@ p {
 	text-align: left;
 }
 
-/* Stuff Section */
+/* Stuff Section (was projects) */
 #stuff .projects {
 	flex-direction: column;
 	max-width: 1200px;
@@ -435,26 +435,21 @@ p {
 	transform: translateY(0);
 }
 
-/* Wave Jumping Text Effect */
-.wave-text {
+/* Jump + Color Wave Animations for all letters outside #home */
+.jump-color-wave {
 	display: inline-block;
+	animation: jump 1.2s ease-in-out infinite, colorWave 4s ease-in-out infinite alternate;
 }
 
-.wave-text span {
-	display: inline-block;
-	animation: waveJump 2s infinite ease-in-out;
-	animation-delay: calc(var(--i) * 0.2s);
+@keyframes jump {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-8px); }
 }
 
-/* Gentle jump + color shift */
-@keyframes waveJump {
-	0%, 100% {
-		transform: translateY(0);
-		color: black;
-	}
-	50% {
-		transform: translateY(-10px);
-		color: lightskyblue;
-	}
+@keyframes colorWave {
+	0% { color: skyblue; }
+	50% { color: palepink; }
+	100% { color: skyblue; }
 }
+
 
