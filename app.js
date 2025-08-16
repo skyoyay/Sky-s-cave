@@ -29,7 +29,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Hero text animation (jump + color wave)
+// Hero text animation (jump + color wave) for #home
 const heroTexts = document.querySelectorAll("#home .hero h1");
 
 heroTexts.forEach((text, index) => {
@@ -40,8 +40,33 @@ heroTexts.forEach((text, index) => {
     const span = document.createElement("span");
     span.textContent = letter;
     span.style.setProperty("--i", i); // set index for animation delay
-    span.classList.add("jump-color-wave");
+    // Only jump without color change for #home
+    span.style.animation = `jump 1.2s ease-in-out infinite`;
     text.appendChild(span);
   });
 });
+
+// Function to wrap letters in spans for jump + color wave outside #home
+function wrapLettersWithAnimation(selector) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(el => {
+    // Skip #home
+    if (el.closest("#home")) return;
+
+    const letters = el.textContent.split("");
+    el.textContent = ""; // clear original text
+
+    letters.forEach((letter, i) => {
+      const span = document.createElement("span");
+      span.textContent = letter;
+      span.style.setProperty("--i", i);
+      span.classList.add("jump-color-wave");
+      el.appendChild(span);
+    });
+  });
+}
+
+// Apply to headings, paragraphs, links outside #home
+wrapLettersWithAnimation("h1, h2, p, a, .section-title span, .brand h1 span");
+
 
