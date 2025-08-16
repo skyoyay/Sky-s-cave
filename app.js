@@ -1,42 +1,25 @@
-// Hamburger menu toggle
-const hamburger = document.querySelector("#header .hamburger");
-const navList = document.querySelector("#header .nav-list ul");
+const hamburger = document.querySelector('.header .nav-bar .nav-list .hamburger');
+const mobile_menu = document.querySelector('.header .nav-bar .nav-list ul');
+const menu_item = document.querySelectorAll('.header .nav-bar .nav-list ul li a');
+const header = document.querySelector('.header.container');
 
-hamburger.addEventListener("click", () => {
-	hamburger.classList.toggle("active");
-	navList.classList.toggle("active");
+hamburger.addEventListener('click', () => {
+	hamburger.classList.toggle('active');
+	mobile_menu.classList.toggle('active');
 });
 
-// Smooth scrolling for nav links
-document.querySelectorAll("#header .nav-list ul a").forEach(link => {
-	link.addEventListener("click", (e) => {
-		e.preventDefault();
-		hamburger.classList.remove("active");
-		navList.classList.remove("active");
-		const targetId = link.getAttribute("href").substring(1);
-		const targetSection = document.getElementById(targetId);
-		if(targetSection) {
-			targetSection.scrollIntoView({ behavior: "smooth" });
-		}
-	});
+document.addEventListener('scroll', () => {
+	var scroll_position = window.scrollY;
+	if (scroll_position > 250) {
+		header.style.backgroundColor = '#29323c';
+	} else {
+		header.style.backgroundColor = 'transparent';
+	}
 });
 
-// Fade-in on scroll
-const faders = document.querySelectorAll(".fade-section");
-
-const appearOptions = {
-	threshold: 0.1,
-	rootMargin: "0px 0px -50px 0px"
-};
-
-const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
-	entries.forEach(entry => {
-		if(!entry.isIntersecting) return;
-		entry.target.classList.add("appear");
-		appearOnScroll.unobserve(entry.target);
+menu_item.forEach((item) => {
+	item.addEventListener('click', () => {
+		hamburger.classList.toggle('active');
+		mobile_menu.classList.toggle('active');
 	});
-}, appearOptions);
-
-faders.forEach(fader => {
-	appearOnScroll.observe(fader);
 });
