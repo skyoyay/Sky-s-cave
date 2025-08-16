@@ -29,14 +29,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Hero text animation (optional if needed)
+// Hero text animation (jump + color wave)
 const heroTexts = document.querySelectorAll("#home .hero h1");
+
 heroTexts.forEach((text, index) => {
-  const span = text.querySelector("span");
-  text.style.opacity = 0;
-  setTimeout(() => {
-    text.style.transition = "opacity 0.5s ease";
-    text.style.opacity = 1;
-    if (span) span.style.animation = `text_reveal_box 1s ease ${index * 1}s forwards`;
-  }, index * 1000);
+  const letters = text.textContent.split("");
+  text.textContent = ""; // clear original text
+
+  letters.forEach((letter, i) => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.setProperty("--i", i); // set index for animation delay
+    span.classList.add("jump-color-wave");
+    text.appendChild(span);
+  });
 });
+
