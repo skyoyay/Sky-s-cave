@@ -1,66 +1,27 @@
-// Hamburger menu toggle
-const hamburger = document.querySelector(".hamburger");
-const navList = document.querySelector(".nav-list ul");
+const hamburger = document.querySelector('.header .nav-bar .nav-list .hamburger');
+const mobile_menu = document.querySelector('.header .nav-bar .nav-list ul');
+const menu_item = document.querySelectorAll('.header .nav-bar .nav-list ul li a');
+const header = document.querySelector('.header.container');
 
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  navList.classList.toggle("active");
+hamburger.addEventListener('click', () => {
+	hamburger.classList.toggle('active');
+	mobile_menu.classList.toggle('active');
 });
 
-// Close menu on nav item click
-document.querySelectorAll(".nav-list ul li a").forEach(link => {
-  link.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navList.classList.remove("active");
-  });
+document.addEventListener('scroll', () => {
+	var scroll_position = window.scrollY;
+	if (scroll_position > 250) {
+		header.style.backgroundColor = '#29323c';
+	} else {
+		header.style.backgroundColor = 'transparent';
+	}
 });
 
-// Smooth scroll for internal links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-  });
-});
-
-// Hero text animation (home section)
-const heroTexts = document.querySelectorAll("#home .hero h1");
-
-heroTexts.forEach((text) => {
-  const letters = text.textContent.split("");
-  text.textContent = "";
-
-  letters.forEach((letter, i) => {
-    const span = document.createElement("span");
-    span.textContent = letter;
-    span.style.setProperty("--i", i);
-    span.classList.add("jump-color-wave-home");
-    text.appendChild(span);
-  });
-});
-
-// Jump + color wave for all other text outside home
-const allTextElements = document.querySelectorAll("h1, h2, p, a, .section-title, .project-info");
-
-allTextElements.forEach(el => {
-  if (!el.closest("#home")) { // exclude #home
-    const letters = el.textContent.split("");
-    el.textContent = "";
-
-    letters.forEach((letter, i) => {
-      const span = document.createElement("span");
-      span.textContent = letter;
-      span.style.setProperty("--i", i);
-      span.classList.add("jump-color-wave");
-      el.appendChild(span);
-    });
-  }
+menu_item.forEach((item) => {
+	item.addEventListener('click', () => {
+		hamburger.classList.toggle('active');
+		mobile_menu.classList.toggle('active');
+	});
 });
 
 
