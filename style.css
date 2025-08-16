@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+font-family: 'Press Start 2P', cursive;
 * {
 	padding: 0;
 	margin: 0;
@@ -638,3 +639,4 @@ p {
 	/* contact  */
 	#contact .contact {
 		flex-direction: column;
+
