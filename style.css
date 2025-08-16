@@ -225,7 +225,7 @@ p {
 }
 /* End Header section */
 
-/* Home Section */
+/* Home Section (excluded from wave effect) */
 #home {
 	background-image: url(fortniteorbabag.jpg);
 	background-size: cover;
@@ -258,7 +258,18 @@ p {
 	width: fit-content;
 	font-size: 4rem;
 	position: relative;
-	color: white;
+	color: transparent;
+	animation: text_reveal 0.5s ease forwards;
+}
+
+#home h1 span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	background-color: lightskyblue;
+	animation: text_reveal_box 1s ease;
 }
 
 /* Games Section */
@@ -424,28 +435,26 @@ p {
 	transform: translateY(0);
 }
 
-/* ============================= */
-/* 🔥 Jumping Wave Text Effect   */
-/* ============================= */
-.jumping-text span {
-  display: inline-block;
-  animation: jump 2s infinite ease-in-out;
+/* Wave Jumping Text Effect */
+.wave-text {
+	display: inline-block;
 }
 
-@keyframes jump {
-  0%, 100% { transform: translateY(0); color: white; }
-  50% { transform: translateY(-8px); color: lightskyblue; }
+.wave-text span {
+	display: inline-block;
+	animation: waveJump 2s infinite ease-in-out;
+	animation-delay: calc(var(--i) * 0.2s);
 }
 
-/* Delay each letter slightly for wave */
-.jumping-text span:nth-child(1) { animation-delay: 0s; }
-.jumping-text span:nth-child(2) { animation-delay: 0.1s; }
-.jumping-text span:nth-child(3) { animation-delay: 0.2s; }
-.jumping-text span:nth-child(4) { animation-delay: 0.3s; }
-.jumping-text span:nth-child(5) { animation-delay: 0.4s; }
-.jumping-text span:nth-child(6) { animation-delay: 0.5s; }
-.jumping-text span:nth-child(7) { animation-delay: 0.6s; }
-.jumping-text span:nth-child(8) { animation-delay: 0.7s; }
-.jumping-text span:nth-child(9) { animation-delay: 0.8s; }
-.jumping-text span:nth-child(10) { animation-delay: 0.9s; }
-/* add more nth-child rules if your text is longer */
+/* Gentle jump + color shift */
+@keyframes waveJump {
+	0%, 100% {
+		transform: translateY(0);
+		color: black;
+	}
+	50% {
+		transform: translateY(-10px);
+		color: lightskyblue;
+	}
+}
+
